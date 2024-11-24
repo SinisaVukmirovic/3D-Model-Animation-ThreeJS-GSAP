@@ -2,7 +2,6 @@
 @import url('https://fonts.cdnfonts.com/css/poppins');
 @import url('https://fonts.cdnfonts.com/css/bimbo');
 
-
 body {
     margin: 0;
     font-family: "Montserrat", sans-serif;
@@ -66,6 +65,11 @@ header .content-fit {
 header .content-fit nav ul{
     display: flex;
     gap: 2em;
+
+    & a {
+        text-decoration: none;
+        color: inherit;
+    }
 }
 
 #banner .title {
