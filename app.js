@@ -27,6 +27,8 @@ const scene = new THREE.Scene();
 
 // importing 3D model to be able to use it in this project
 let model;
+// initializing mixer variable to use for model animation
+let mixer; 
 
 const loader = new GLTFLoader();
 // using load method to get the file information
@@ -37,8 +39,11 @@ loader.load('./assets/3Dmodel.glb',
         model = gltf.scene;
         model.scale.set(.25,.25,.25);
         model.position.y = -.2;
-        model.rotation.y = 2;
+        model.rotation.y = .75;
         scene.add(model);
+
+        mixer = new THREE.AnimationMixer(model);
+        mixer.clipAction(gltf.animations[0]).play();
     },
     // 2nd callback function will continuously run during the loading process to help the user check the loading file process
     function(xhr) {},
@@ -71,6 +76,8 @@ const reRendered3D = () => {
     requestAnimationFrame(reRendered3D);
 
     renderer.render(scene, camera);
+
+    if (mixer) mixer.update(.03);
 }
 
 reRendered3D();
