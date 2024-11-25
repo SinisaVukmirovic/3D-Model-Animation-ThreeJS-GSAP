@@ -35,7 +35,7 @@ loader.load('./assets/3Dmodel.glb',
     function(gltf) {
         // if the file upload is successfull, putting the model into the scene
         model = gltf.scene;
-        model.scale.set(.3,.3,.3);
+        model.scale.set(.25,.25,.25);
         model.position.y = -.2;
         model.rotation.y = 2;
         scene.add(model);
@@ -53,7 +53,17 @@ const renderer = new THREE.WebGLRenderer( {alpha:true} );
 // setting the canvas size the same as the browser window
 renderer.setSize(window.innerWidth, window.innerHeight);
 // putting the canvas into the container3D DIV element we created in HTML
-document.querySelector('#container3D').appendChild(renderer.domElement); 
+document.querySelector('#container3D').appendChild(renderer.domElement);
+
+// 3. using light on our 3D model to not be black entirely
+// when working with 3D models, we have 2 basic types of light - abmient light and directional light
+const ambientLight = new THREE.AmbientLight(0xffffff, 1.3);
+// first value is the color of the light, second value is the intensity
+scene.add(ambientLight);
+
+const topLight = new THREE.DirectionalLight(0xffffff, 1);
+topLight.position.set(500, 500, 500);
+scene.add(topLight);
 
 // using data from the scene and the camera to draw 3D model on the canvas
 // calling that function to repeatedly rerender with request animation frame for smoother performance
