@@ -16,4 +16,4 @@ ___
 ##### forth value is "far" (determins the farthest distance the camera can see)
 
 #### Camera setup for our project
-![Camera setup](setup.png)
+![Camera setup](./screenshots/setup.png)
