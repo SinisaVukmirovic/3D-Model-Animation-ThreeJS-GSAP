@@ -38,7 +38,7 @@ loader.load('./assets/3Dmodel.glb',
         // if the file upload is successfull, putting the model into the scene
         model = gltf.scene;
         model.scale.set(.25,.25,.25);
-        model.position.y = -.2;
+        model.position.y = -.4;
         model.rotation.y = .75;
         scene.add(model);
 

@@ -6,11 +6,11 @@ body {
     margin: 0;
     font-family: "Montserrat", sans-serif;
     background-color: #1B1B1B;
-    color: #eef8ce;
+    color: #ceeef8;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     background-image:
-    url(img/bg.png),
+    url(img/bg-2.png),
     repeating-linear-gradient(
         to right, transparent 0 500px, #73814B33 500px 501px
     );
@@ -73,7 +73,7 @@ header .content-fit nav ul{
 }
 
 #banner .title {
-    color: #d1ff48;
+    color: #48fff6;
     font-size: 11em;
     font-family: "devil breeze";
     font-weight: bold;
@@ -86,7 +86,7 @@ header .content-fit nav ul{
     top: 0.5em;
     inset: 0.66em 0 0 0;
     z-index: -1;
-    color: #445022;
+    color: #30706c;
 }
 .section .decorate {
     position: absolute;
