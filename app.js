@@ -81,3 +81,51 @@ const reRendered3D = () => {
 }
 
 reRendered3D();
+
+// array of values for model position when scrolling
+let arrPositionModel = [
+    {
+        id: 'banner',
+        position: { x: 0, y: -1, z: 0 },
+        rotation: { x: 0, y: 1.5, z: 0 }
+    },
+    {
+        id: 'intro',
+        position: { x: 1.5, y: -1, z: -5 },
+        rotation: { x: .5, y: -.5, z: 8 }
+    },
+    {
+        id: 'description',
+        position: { x: -1, y: -1, z: -5 },
+        rotation: { x: 0, y: .5, z: 0 }
+    },
+    {
+        id: 'contact',
+        position: { x: 1, y: -1, z: 0 },
+        rotation: { x: .3, y: -.5, z: 0 }
+    }
+];
+
+const modelMove = () => {
+    const sections = document.querySelectorAll('.section');
+    let currentSection;
+
+    sections.forEach(section => {
+        // getting sections current possition information
+        const rect = section.getBoundingClientRect();
+        // if its current distance is less than 1/3 of the screen height
+        // we take the height of that section as the current possition 
+        if (rect.top <= window.innerHeight / 3) {
+            currentSection = section.id;
+        }
+    });
+    console.log(currentSection)
+}
+
+// capturing when the user scrolls
+window.addEventListener('scroll', () => {
+    // perform this only if the 3D model has been loaded
+    if (model) {
+        modelMove();
+    }
+});
