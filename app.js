@@ -38,7 +38,11 @@ loader.load('./assets/3Dmodel.glb',
         // if the file upload is successfull, putting the model into the scene
         model = gltf.scene;
         model.scale.set(.25,.25,.25);
-        model.position.y = -.4;
+
+        model.position.x = .3;
+        model.position.y = -.3;
+        model.position.z = 0;
+
         model.rotation.y = .75;
         scene.add(model);
 
@@ -86,12 +90,12 @@ reRendered3D();
 let arrPositionModel = [
     {
         id: 'banner',
-        position: { x: 0, y: -1, z: 0 },
+        position: { x: -.6, y: -.3, z: 0 },
         rotation: { x: 0, y: 1.5, z: 0 }
     },
     {
         id: 'intro',
-        position: { x: 1.5, y: -1, z: -5 },
+        position: { x: .6, y: .6, z: -5 },
         rotation: { x: .5, y: -.5, z: 8 }
     },
     {
@@ -119,7 +123,19 @@ const modelMove = () => {
             currentSection = section.id;
         }
     });
-    console.log(currentSection)
+    
+    // finding the position of the active section with findIndex() method
+    let position_active = arrPositionModel.findIndex(val => 
+        val.id == currentSection
+    );
+    // if the found position if greated than or equal to 0, 
+    // it means we found it in the original array
+    if (position_active >= 0) {
+        let new_coordinates = arrPositionModel[position_active];
+        model.position.x = new_coordinates.position.x;
+        model.position.y = new_coordinates.position.y;
+        model.position.z = new_coordinates.position.z;
+    }
 }
 
 // capturing when the user scrolls
