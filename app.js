@@ -90,12 +90,12 @@ reRendered3D();
 let arrPositionModel = [
     {
         id: 'banner',
-        position: { x: -.6, y: -.3, z: 0 },
+        position: { x: -1, y: -.3, z: -5 },
         rotation: { x: 0, y: 1.5, z: 0 }
     },
     {
         id: 'intro',
-        position: { x: .6, y: .6, z: -5 },
+        position: { x: .6, y: -.2, z: 5 },
         rotation: { x: .5, y: -.5, z: 8 }
     },
     {
@@ -119,8 +119,11 @@ const modelMove = () => {
         const rect = section.getBoundingClientRect();
         // if its current distance is less than 1/3 of the screen height
         // we take the height of that section as the current possition 
-        if (rect.top <= window.innerHeight / 3) {
+        if (rect.bottom <= window.innerHeight / 1.5) {
             currentSection = section.id;
+        }
+        if (rect.top <= window.innerHeight / 3) {
+            model.position.x = .3;
         }
     });
     
