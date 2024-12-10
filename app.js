@@ -37,15 +37,19 @@ loader.load('./assets/3Dmodel.glb',
         model = gltf.scene;
         model.scale.set(.3, .3, .3);
 
-        model.position.x = .3;
-        model.position.y = -.3;
-        model.position.z = 0;
+        // model.position.x = .3;
+        // model.position.y = -.3;
+        // model.position.z = 0;
 
-        model.rotation.y = 1.5;
+        // model.rotation.y = 1.5;
+
         scene.add(model);
 
         mixer = new THREE.AnimationMixer(model);
         mixer.clipAction(gltf.animations[0]).play();
+
+        // instead of setting starting values above, we can use modelMove function here
+        modelMove();
     },
     // 2nd callback function will continuously run during the loading process to help the user check the loading file process
     function(xhr) {},
@@ -85,28 +89,6 @@ const reRendered3D = () => {
 reRendered3D();
 
 // array of values for model position when scrolling
-// let arrPositionModel = [
-//     {
-//         id: 'banner',
-//         position: { x: -1, y: -.3, z: -5 },
-//         rotation: { x: 0, y: 1.5, z: 0 }
-//     },
-//     {
-//         id: 'intro',
-//         position: { x: .6, y: -.2, z: 5 },
-//         rotation: { x: .5, y: -.5, z: 8 }
-//     },
-//     {
-//         id: 'description',
-//         position: { x: -1, y: -1, z: -5 },
-//         rotation: { x: 0, y: .5, z: 0 }
-//     },
-//     {
-//         id: 'contact',
-//         position: { x: .5, y: -.5, z: 0 },
-//         rotation: { x: .3, y: -.5, z: 0 }
-//     }
-// ];
 let arrPositionModel = [
     {
         id: 'banner',
@@ -120,13 +102,13 @@ let arrPositionModel = [
     },
     {
         id: 'description',
-        position: { x: .5, y: 0, z: 6 },
+        position: { x: .5, y: -.2, z: 5 },
         rotation: { x: .5, y: -1.5, z: .5 }
     },
     {
         id: 'contact',
-        position: { x: 0, y: 0, z: -4 },
-        rotation: { x: .7, y: 0, z: 0 }
+        position: { x: 0, y: 0, z: -3 },
+        rotation: { x: 1, y: 0, z: 0 }
     }
 ];
 
@@ -166,14 +148,14 @@ const modelMove = () => {
             x: new_coordinates.position.x,
             y: new_coordinates.position.y,
             z: new_coordinates.position.z,
-            duration: 1,
+            duration: 1.25,
             ease: 'power1.out'
         });
         gsap.to(model.rotation, {
             x: new_coordinates.rotation.x,
             y: new_coordinates.rotation.y,
             z: new_coordinates.rotation.z,
-            duration: 2,
+            duration: 1.75,
             ease: 'power1.out'
         });
     }
@@ -186,3 +168,13 @@ window.addEventListener('scroll', () => {
         modelMove();
     }
 });
+
+// NOT REALLY WORKING PROPERLY...
+// to make it responsive
+window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight
+    // calling updateProjectionMatrix in order for it to take effect
+    camera.updateProjectionMatrix();
+});
+// NOT REALLY WORKING PROPERLY...

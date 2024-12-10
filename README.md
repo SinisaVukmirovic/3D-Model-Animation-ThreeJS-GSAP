@@ -13,7 +13,7 @@ ___
 ##### first value is viewing angle (increasing or decreasing will make us see more or less things)
 ##### second value is aspect (ratio of the frame wo contain 3D model)
 ##### third value is "near" (used to determine the closest distance the camera can see)
-##### forth value is "far" (determins the farthest distance the camera can see)
+##### forth value is "far" (determins the farthnest distance the camera can see)
 
 #### Camera setup for our project
 ![Camera setup](./screenshots/setup.png)
