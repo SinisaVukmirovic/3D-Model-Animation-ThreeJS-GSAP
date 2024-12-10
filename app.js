@@ -1,10 +1,8 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
 // to be able to read the GLB  file format we are importing GLTF Loader library
 import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
-
-// import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
-// import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
-// import { gsap } from 'https://cdn.skypack.dev/gsap';
+// importing GSAP to have the animation steps animate smooth
+import { gsap } from 'https://cdn.skypack.dev/gsap';
 
 // 1. camera
 const camera = new THREE.PerspectiveCamera(
@@ -37,13 +35,13 @@ loader.load('./assets/3Dmodel.glb',
     function(gltf) {
         // if the file upload is successfull, putting the model into the scene
         model = gltf.scene;
-        model.scale.set(.25,.25,.25);
+        model.scale.set(.3, .3, .3);
 
         model.position.x = .3;
         model.position.y = -.3;
         model.position.z = 0;
 
-        model.rotation.y = .75;
+        model.rotation.y = 1.5;
         scene.add(model);
 
         mixer = new THREE.AnimationMixer(model);
@@ -87,26 +85,48 @@ const reRendered3D = () => {
 reRendered3D();
 
 // array of values for model position when scrolling
+// let arrPositionModel = [
+//     {
+//         id: 'banner',
+//         position: { x: -1, y: -.3, z: -5 },
+//         rotation: { x: 0, y: 1.5, z: 0 }
+//     },
+//     {
+//         id: 'intro',
+//         position: { x: .6, y: -.2, z: 5 },
+//         rotation: { x: .5, y: -.5, z: 8 }
+//     },
+//     {
+//         id: 'description',
+//         position: { x: -1, y: -1, z: -5 },
+//         rotation: { x: 0, y: .5, z: 0 }
+//     },
+//     {
+//         id: 'contact',
+//         position: { x: .5, y: -.5, z: 0 },
+//         rotation: { x: .3, y: -.5, z: 0 }
+//     }
+// ];
 let arrPositionModel = [
     {
         id: 'banner',
-        position: { x: -1, y: -.3, z: -5 },
+        position: { x: .3, y: -.3, z: 0 },
         rotation: { x: 0, y: 1.5, z: 0 }
     },
     {
         id: 'intro',
-        position: { x: .6, y: -.2, z: 5 },
-        rotation: { x: .5, y: -.5, z: 8 }
-    },
-    {
-        id: 'description',
-        position: { x: -1, y: -1, z: -5 },
+        position: { x: -1, y: 0, z: -3 },
         rotation: { x: 0, y: .5, z: 0 }
     },
     {
+        id: 'description',
+        position: { x: .5, y: 0, z: 6 },
+        rotation: { x: .5, y: -1.5, z: .5 }
+    },
+    {
         id: 'contact',
-        position: { x: 1, y: -1, z: 0 },
-        rotation: { x: .3, y: -.5, z: 0 }
+        position: { x: 0, y: 0, z: -4 },
+        rotation: { x: .7, y: 0, z: 0 }
     }
 ];
 
@@ -119,11 +139,15 @@ const modelMove = () => {
         const rect = section.getBoundingClientRect();
         // if its current distance is less than 1/3 of the screen height
         // we take the height of that section as the current possition 
-        if (rect.bottom <= window.innerHeight / 1.5) {
+        // if (rect.bottom <= window.innerHeight / 1.5) {
+        //     currentSection = section.id;
+        // }
+        // if (rect.top <= window.innerHeight / 3) {
+        //     model.position.x = .3;
+        // }
+        // test
+        if (rect.top <= window.innerHeight / 2) {
             currentSection = section.id;
-        }
-        if (rect.top <= window.innerHeight / 3) {
-            model.position.x = .3;
         }
     });
     
@@ -135,9 +159,23 @@ const modelMove = () => {
     // it means we found it in the original array
     if (position_active >= 0) {
         let new_coordinates = arrPositionModel[position_active];
-        model.position.x = new_coordinates.position.x;
-        model.position.y = new_coordinates.position.y;
-        model.position.z = new_coordinates.position.z;
+        // model.position.x = new_coordinates.position.x;
+        // model.position.y = new_coordinates.position.y;
+        // model.position.z = new_coordinates.position.z;
+        gsap.to(model.position, {
+            x: new_coordinates.position.x,
+            y: new_coordinates.position.y,
+            z: new_coordinates.position.z,
+            duration: 1,
+            ease: 'power1.out'
+        });
+        gsap.to(model.rotation, {
+            x: new_coordinates.rotation.x,
+            y: new_coordinates.rotation.y,
+            z: new_coordinates.rotation.z,
+            duration: 2,
+            ease: 'power1.out'
+        });
     }
 }
 
