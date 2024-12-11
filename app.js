@@ -93,7 +93,7 @@ let arrPositionModel = [
     {
         id: 'banner',
         position: { x: .3, y: -.3, z: 0 },
-        rotation: { x: 0, y: 1.5, z: 0 }
+        rotation: { x: 0, y: 1.5, z: .8 }
     },
     {
         id: 'intro',
